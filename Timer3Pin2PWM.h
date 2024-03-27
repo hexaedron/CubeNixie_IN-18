@@ -54,3 +54,10 @@ void setTimer3Pin2PWMDuty(uint8_t dutyPct)
     OCR3B = OCR3A / 100 * dutyPct;
   interrupts();
 }
+
+void setTimer3Interrupt()
+{
+  noInterrupts();
+  TIMSK3 = 1 << OCIE3B;
+  interrupts();
+}

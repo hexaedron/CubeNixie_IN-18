@@ -32,11 +32,21 @@ char datetime[] = "0000";
 brightness Brightness = {50, 50};
 byte mac[6] = {0x66, 0xAA, (uint8_t &)GUID0, (uint8_t &)GUID1, (uint8_t &) GUID2, (uint8_t &)GUID3}; // MAC-адрес будет формироваться уникальный для каждого чипа
 
+ISR(TIMER3_vect) // При каждом срабатывании таймера обнуляем вотчдог
+{
+  if (TIFR3 & (1 << OCF3B)) 
+  {
+      TIFR3 = 1 << OCF3B;
+      wdt_reset();
+  }
+}
+
 void setup() 
 {
   // Сразу поставим небольшую яркость, чтобы выжечь глаза ночью
   initTimer3Pin2PWM_32_2000(95, 75);
   wdt_enable(WTO_128MS); // Ставим вотчдог.
+  setTimer3Interrupt();  // Запускаем прерывания по таймеру.
 
   #ifdef INFO_ENABLE
     Serial.begin(115200);
