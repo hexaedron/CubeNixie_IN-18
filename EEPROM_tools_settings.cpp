@@ -61,6 +61,18 @@ int32_t getGMTOffset(void)
     return (int32_t)EEPROM.readByte(GMT_OFFSET_HOURS_EEPROM_ADDRESS) * 60 * 60 + seconds;
 }
 
+uint32_t getIPAddress(void)
+{
+    uint32_t address; 
+    EEPROM.readBlock(DEFAULT_IP_ADDRESS_ADDRESS, (uint8_t *)&address, sizeof(address));
+    return address;
+}
+
+void setIPAddress(uint32_t address)
+{ 
+    EEPROM.updateBlock(DEFAULT_IP_ADDRESS_ADDRESS, (uint8_t *)&address, sizeof(address));
+}
+
 void EEPROMValuesInit(bool force = false)
 {
   if ((EEPROM.readByte((uint16_t)INIT_ADDR) != INIT_KEY) || force)  // первый запуск или принудительная очистка
@@ -73,5 +85,6 @@ void EEPROMValuesInit(bool force = false)
     setGMTOffset(GMT_SECONDS_OFFSET);
     setDayDotsBrightness(DOTS_DAY_BRIGHTNESS);
     setNightDotsBrightness(DOTS_NIGHT_BRIGHTNESS);
+    setIPAddress(DEFAULT_IP_ADDRESS);
   }
 }

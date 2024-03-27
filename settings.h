@@ -15,6 +15,8 @@
 #define GMT_OFFSET_MINUTES_EEPROM_ADDRESS (uint16_t)3
 #define DOTS_NIGHT_BRIGHTNESS_EEPROM_ADDRESS (uint16_t)4
 #define DOTS_DEFAULT_BRIGHTNESS_EEPROM_ADDRESS (uint16_t)5
+#define DEFAULT_IP_ADDRESS_ADDRESS (uint16_t)6
+#define DEFAULT_IP_ADDRESS 0x0101A8C0UL //192.168.1.1
 #define DEFAULT_BRIGHTNESS 60 
 #define NIGHT_BRIGHTNESS 75
 #define DOTS_DAY_BRIGHTNESS 100
@@ -22,7 +24,6 @@
 #define DOTS_OFF 0
 #define INIT_ADDR 512  // номер резервной ячейки
 #define INIT_KEY 67     // ключ первого запуска. 0-254, на выбор
-#define SOFT_RTC_DELTA_T 1210 // Компенсация отставаний софт часов
 
 
 #define GPS_IS_VALID() (ATGM332D.time.isValid() && ATGM332D_day.isValid() && ATGM332D_month.isValid() && ATGM332D_year.isValid() && ATGM332D.location.isValid())
@@ -60,7 +61,7 @@ void makeDateTimeScreen(char* datetime, uint8_t hr, uint8_t min);
 // Подготавливает и заполняет ИН-18
 void populateIN18(char* datetime, byte* shiftBytes);
 
-void adjustTime(uint32_t GMTSecondsOffset);
+bool adjustTime(uint32_t GMTSecondsOffset);
 void calculateBrightness();
 
 uint8_t getDayBrightness(void);
