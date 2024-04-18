@@ -58,6 +58,6 @@ void setTimer3Pin2PWMDuty(uint8_t dutyPct)
 void setTimer3Interrupt()
 {
   noInterrupts();
-  TIMSK3 = 1 << OCIE3B;
+    TIMSK3 = 1 << OCIE3B;
   interrupts();
 }
