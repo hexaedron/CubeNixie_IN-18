@@ -9,7 +9,7 @@ void populateIN18(char* datetime, byte* shiftBytes)
   shiftBytes[2] = 0;
   shiftBytes[3] = 0;
   shiftBytes[4] = 0;
-  
+
   //// Обработка 2 байта segBytes
   //// Фиксим ошибку в плате - инвертированные ножки у U7
   //for (uint8_t i = 0; i <= 4; i++)
@@ -76,7 +76,7 @@ void populateIN18(char* datetime, byte* shiftBytes)
     break;
 
     case '3':
-     bitSet(shiftBytes[1], 5);
+      bitSet(shiftBytes[1], 5);
     break;
 
     case '4':
@@ -88,19 +88,19 @@ void populateIN18(char* datetime, byte* shiftBytes)
     break;
 
     case '6':
-      bitSet(shiftBytes[2], 0);
+      bitSet(shiftBytes[2], 3);
     break;
 
     case '7':
-      bitSet(shiftBytes[2], 1);
-    break;
-
-    case '8':
       bitSet(shiftBytes[2], 2);
     break;
 
+    case '8':
+      bitSet(shiftBytes[2], 1);
+    break;
+
     case '9':
-      bitSet(shiftBytes[2], 3);
+      bitSet(shiftBytes[2], 0);
     break;
   }
 
