@@ -28,7 +28,7 @@ EthernetUDP ntpUDP;
 NTPClient timeClient(ntpUDP);
 
 // Буферы
-char datetime[] = "0000";
+char datetime[5] = "0000";
 brightness Brightness = {50, 50};
 byte mac[6] = {0x66, 0xAA, (uint8_t &)GUID0, (uint8_t &)GUID1, (uint8_t &) GUID2, (uint8_t &)GUID3}; // MAC-адрес будет формироваться уникальный для каждого чипа
 
@@ -89,11 +89,12 @@ void setup()
 
 void loop() 
 {
-  uint8_t hour = rtc.getHours();
-  uint8_t minute = rtc.getMinutes();
-  uint8_t second = rtc.getSeconds();
-  bool minRefreshFlag = true;
-  bool dotRefreshFlag = true;
+  uint8_t hour           = rtc.getHours();
+  uint8_t minute         = rtc.getMinutes();
+  uint8_t second         = rtc.getSeconds();
+  bool    minRefreshFlag = true;
+  bool    dotRefreshFlag = true;
+  bool    animationFlag  = true;
   Timer16 clockTimer(500);
 
   // Это время в минутах, прибавляемое к периоду обновления NTP, 
@@ -132,9 +133,9 @@ void loop()
       DEBUG("Dots Brightness   = ", Brightness.dots);
     }
 
-    // Каждые 5 мин фиксим время и локацию, на всякий
+    // Каждые minAdd мин фиксим время и локацию, на всякий
     // Сюда же воткнём установку яркости, супер часто это делать смысла немного
-    // И пересчёт восхода/заката сюда же, раз в час, ЧЧ:05
+    // И пересчёт восхода/заката сюда же, раз в час, ЧЧ:minAdd
     if(minute % (3 + minAdd)) 
     {
       if(minRefreshFlag)
@@ -149,6 +150,35 @@ void loop()
     {
       minRefreshFlag = true;
     }
+
+    // Раз в 10 мин рисуем анимацию
+    if(minute % 10) 
+    {
+      if(animationFlag)
+      {
+        char buf[5]; // Копия datetime для анимации
+        memcpy(buf, datetime, 5);
+        analogWrite(SW_DOTS, DOTS_OFF);
+
+        for(uint8_t j = 0; j < 4; j++)
+        {
+          for(uint8_t i = 0; i < 9; i++)
+          {
+            datetime[j] = '0' + i;
+            print_IN_18();
+            delay(100);
+          }
+
+          datetime[j] = buf[j];
+        }
+        print_IN_18();
+      }
+    }
+    else
+    {
+      animationFlag = true;
+    }
+
   }
 }
 
