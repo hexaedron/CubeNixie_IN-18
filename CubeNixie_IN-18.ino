@@ -45,10 +45,10 @@ void setup()
 {
   // Сразу поставим небольшую яркость, чтобы не выжечь глаза ночью
   initTimer3Pin2PWM_32_2000(95, 75);
-  wdt_enable(WTO_128MS); // Ставим вотчдог.
+  //wdt_enable(WTO_128MS); // Ставим вотчдог.
   setTimer3Interrupt();  // Запускаем прерывания по таймеру.
 
-  #ifdef INFO_ENABLE
+  #ifdef DEBUG_ENABLE
     Serial.begin(115200);
     INFO("Starting");
   #endif
@@ -227,6 +227,13 @@ void print_IN_18()
 {
   byte shiftBytes[5] = {'\0'};
   populateIN18(datetime, shiftBytes);
+
+  DEBUG_BIN("shiftBytes[0] = ", shiftBytes[0]);
+  DEBUG_BIN("shiftBytes[1] = ", shiftBytes[1]);
+  DEBUG_BIN("shiftBytes[2] = ", shiftBytes[2]);
+  DEBUG_BIN("shiftBytes[3] = ", shiftBytes[3]);
+  DEBUG_BIN("shiftBytes[4] = ", shiftBytes[4]);
+
 
   digitalWrite(LATCH, LOW);
     for (int8_t i = 4; i >= 0; i--)

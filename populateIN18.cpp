@@ -20,173 +20,173 @@ void populateIN18(char* datetime, byte* shiftBytes)
 
   switch(datetime[0])
   {
-    case '0':
+    case '7':
       bitSet(shiftBytes[0], 0);
     break;
 
-    case '1':
+    case '6':
       bitSet(shiftBytes[0], 1);
     break;
 
-    case '2':
+    case '5':
       bitSet(shiftBytes[0], 2);
     break;
 
-    case '3':
+    case '4':
       bitSet(shiftBytes[0], 3);
     break;
 
-    case '4':
+    case '3':
       bitSet(shiftBytes[0], 4);
     break;
 
-    case '5':
+    case '2':
       bitSet(shiftBytes[0], 5);
     break;
 
-    case '6':
+    case '1':
       bitSet(shiftBytes[0], 6);
     break;
 
-    case '7':
+    case '0':
       bitSet(shiftBytes[0], 7);
     break;
 
     case '8':
-      bitSet(shiftBytes[1], 0);
+      bitSet(shiftBytes[1], 1);
     break;
 
     case '9':
-      bitSet(shiftBytes[1], 1);
+      bitSet(shiftBytes[1], 0);
     break;
   }
 
   switch(datetime[1])
   {
     case '0':
-      bitSet(shiftBytes[1], 2);
-    break;
-
-    case '1':
-      bitSet(shiftBytes[1], 3);
-    break;
-
-    case '2':
-      bitSet(shiftBytes[1], 4);
-    break;
-
-    case '3':
-      bitSet(shiftBytes[1], 5);
-    break;
-
-    case '4':
-      bitSet(shiftBytes[1], 6);
-    break;
-
-    case '5':
       bitSet(shiftBytes[1], 7);
     break;
 
+    case '1':
+      bitSet(shiftBytes[1], 6);
+    break;
+
+    case '2':
+      bitSet(shiftBytes[1], 5);
+    break;
+
+    case '3':
+      bitSet(shiftBytes[1], 4);
+    break;
+
+    case '4':
+      bitSet(shiftBytes[1], 3);
+    break;
+
+    case '5':
+      bitSet(shiftBytes[1], 2);
+    break;
+
     case '6':
-      bitSet(shiftBytes[2], 3);
+      bitSet(shiftBytes[2], 0);
     break;
 
     case '7':
-      bitSet(shiftBytes[2], 2);
-    break;
-
-    case '8':
       bitSet(shiftBytes[2], 1);
     break;
 
+    case '8':
+      bitSet(shiftBytes[2], 2);
+    break;
+
     case '9':
-      bitSet(shiftBytes[2], 0);
+      bitSet(shiftBytes[2], 3);
     break;
   }
 
   switch(datetime[2])
   {
     case '0':
-      bitSet(shiftBytes[2], 4);
-    break;
-
-    case '1':
-      bitSet(shiftBytes[2], 5);
-    break;
-
-    case '2':
-      bitSet(shiftBytes[2], 6);
-    break;
-
-    case '3':
       bitSet(shiftBytes[2], 7);
     break;
 
+    case '1':
+      bitSet(shiftBytes[2], 6);
+    break;
+
+    case '2':
+      bitSet(shiftBytes[2], 5);
+    break;
+
+    case '3':
+      bitSet(shiftBytes[2], 4);
+    break;
+
     case '4':
-      bitSet(shiftBytes[3], 0);
+      bitSet(shiftBytes[3], 5);
     break;
 
     case '5':
-      bitSet(shiftBytes[3], 1);
-    break;
-
-    case '6':
-      bitSet(shiftBytes[3], 2);
-    break;
-
-    case '7':
-      bitSet(shiftBytes[3], 3);
-    break;
-
-    case '8':
       bitSet(shiftBytes[3], 4);
     break;
 
+    case '6':
+      bitSet(shiftBytes[3], 3);
+    break;
+
+    case '7':
+      bitSet(shiftBytes[3], 2);
+    break;
+
+    case '8':
+      bitSet(shiftBytes[3], 1);
+    break;
+
     case '9':
-      bitSet(shiftBytes[3], 5);
+      bitSet(shiftBytes[3], 0);
     break;
   }
 
   switch(datetime[3])
   {
     case '0':
-      bitSet(shiftBytes[3], 6);
-    break;
-
-    case '1':
       bitSet(shiftBytes[3], 7);
     break;
 
+    case '1':
+      bitSet(shiftBytes[3], 6);
+    break;
+
     case '2':
-      bitSet(shiftBytes[4], 0);
+      bitSet(shiftBytes[4], 7);
     break;
 
     case '3':
-      bitSet(shiftBytes[4], 1);
-    break;
-
-    case '4':
-      bitSet(shiftBytes[4], 2);
-    break;
-
-    case '5':
-      bitSet(shiftBytes[4], 3);
-    break;
-
-    case '6':
-      bitSet(shiftBytes[4], 4);
-    break;
-
-    case '7':
-      bitSet(shiftBytes[4], 5);
-    break;
-
-    case '8':
       bitSet(shiftBytes[4], 6);
     break;
 
+    case '4':
+      bitSet(shiftBytes[4], 5);
+    break;
+
+    case '5':
+      bitSet(shiftBytes[4], 4);
+    break;
+
+    case '6':
+      bitSet(shiftBytes[4], 3);
+    break;
+
+    case '7':
+      bitSet(shiftBytes[4], 2);
+    break;
+
+    case '8':
+      bitSet(shiftBytes[4], 1);
+    break;
+
     case '9':
-      bitSet(shiftBytes[4], 7);
+      bitSet(shiftBytes[4], 0);
     break;
   }
 }
