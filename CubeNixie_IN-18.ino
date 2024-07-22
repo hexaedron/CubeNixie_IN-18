@@ -153,13 +153,14 @@ void loop()
     }
 
     // Раз в 10 мин рисуем анимацию
-    if(minute % 10) 
+    if((minute + 1) % 10) 
     {
       if(animationFlag)
       {
         char buf[5]; // Копия datetime для анимации
         memcpy(buf, datetime, 5);
         analogWrite(SW_DOTS, DOTS_OFF);
+        animationFlag = false;
 
         for(uint8_t j = 0; j < 4; j++)
         {
