@@ -14,7 +14,7 @@
 
 #ifdef FAST_SHIFT_OUT
   #include <FastShiftOut.h>
-  FastShiftOut FSO(DATA, CLOCK, LSBFIRST);
+  FastShiftOut FSO(DATA, CLOCK, MSBFIRST);
   #define shiftOut(DATA_PIN, CLOCK, ORDER, VALUE) FSO.write(VALUE)
 #endif
 
@@ -45,7 +45,7 @@ void setup()
 {
   // Сразу поставим небольшую яркость, чтобы не выжечь глаза ночью
   initTimer3Pin2PWM_32_2000(95, 75);
-  //wdt_enable(WTO_128MS); // Ставим вотчдог.
+  wdt_enable(WTO_128MS); // Ставим вотчдог.
   setTimer3Interrupt();  // Запускаем прерывания по таймеру.
 
   #ifdef DEBUG_ENABLE
@@ -72,6 +72,7 @@ void setup()
   print_IN_18();
   while (Ethernet.begin(mac) == 0) 
   {
+    INFO("Try...");
   }
   INFO("DHCP ok!");
 
