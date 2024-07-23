@@ -45,7 +45,7 @@ void setup()
 {
   // Сразу поставим небольшую яркость, чтобы не выжечь глаза ночью
   initTimer3Pin2PWM_32_2000(95, 75);
-  wdt_enable(WTO_128MS); // Ставим вотчдог.
+  wdt_enable(WTO_4S); // Ставим вотчдог.
   setTimer3Interrupt();  // Запускаем прерывания по таймеру.
 
   #ifdef DEBUG_ENABLE
@@ -61,6 +61,8 @@ void setup()
   pinMode(LATCH,   OUTPUT);
   pinMode(CLOCK,   OUTPUT);
   pinMode(SW_DOTS, OUTPUT);
+
+  analogWrite(SW_DOTS, DOTS_NIGHT_BRIGHTNESS);
 
   INFO("Start DHCP");
   // Получим IP-адрес из EEPROM и выставим его на клиенте
