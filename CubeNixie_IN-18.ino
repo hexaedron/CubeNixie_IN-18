@@ -74,7 +74,7 @@ void setup()
   print_IN_18();
   while (Ethernet.begin(mac) == 0) 
   {
-    INFO("Try...");
+    INFO("Try DHCP...");
   }
   INFO("DHCP ok!");
 
@@ -124,6 +124,45 @@ void loop()
     }
     else if((!(second % 2)) && !dotRefreshFlag)
     {
+        // Раз в 10 мин рисуем анимацию
+        if((minute + 1) % 10) 
+        {
+          if(animationFlag)
+          {
+            char buf[5]; // Копия datetime для анимации
+            memcpy(buf, datetime, 5);
+            animationFlag = false;
+
+            uint8_t j = 0;
+            for(j = 0; j < 4; j++)
+            {
+              if((j == 0) || (j == 2))
+              {
+                analogWrite(SW_DOTS, DOTS_OFF);
+              }
+              else
+              {
+                analogWrite(SW_DOTS, Brightness.dots);
+              }
+
+              for(uint8_t i = 0; i < 4; i++)
+              {
+                datetime[j] = '0' + i;
+                print_IN_18();
+                delay(100);
+              }
+
+              datetime[j] = buf[j];
+            }
+            print_IN_18();
+          }
+        }
+        else
+        {
+          animationFlag = true;
+        }
+      
+      // Или просто манипулируем с точками
       analogWrite(SW_DOTS, DOTS_OFF);
 
       makeDateTimeScreen(datetime, hour, minute);
@@ -152,35 +191,6 @@ void loop()
     else
     {
       minRefreshFlag = true;
-    }
-
-    // Раз в 10 мин рисуем анимацию
-    if((minute + 1) % 10) 
-    {
-      if(animationFlag)
-      {
-        char buf[5]; // Копия datetime для анимации
-        memcpy(buf, datetime, 5);
-        analogWrite(SW_DOTS, DOTS_OFF);
-        animationFlag = false;
-
-        for(uint8_t j = 0; j < 4; j++)
-        {
-          for(uint8_t i = 0; i < 9; i++)
-          {
-            datetime[j] = '0' + i;
-            print_IN_18();
-            delay(100);
-          }
-
-          datetime[j] = buf[j];
-        }
-        print_IN_18();
-      }
-    }
-    else
-    {
-      animationFlag = true;
     }
 
   }
