@@ -144,8 +144,8 @@ void loop()
               {
                 analogWrite(SW_DOTS, Brightness.dots);
               }
-
-              for(uint8_t i = 0; i < 4; i++)
+              
+              for(uint8_t i = 0; i < 10; i++)
               {
                 datetime[j] = '0' + i;
                 print_IN_18();
